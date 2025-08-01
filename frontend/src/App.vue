@@ -4,7 +4,6 @@
         <v-toolbar-title class="font-bold">Eder & Steiner GmbH</v-toolbar-title>
         <v-spacer></v-spacer>
 
-        <!-- Desktop -->
         <template v-if="!isMobile">
           <v-btn variant="text" @click="scrollTo('home')">Start</v-btn>
           <v-btn variant="text" @click="scrollTo('services')">Leistungen</v-btn>
@@ -12,7 +11,6 @@
           <v-btn variant="text" @click="scrollTo('contact')">Kontakt</v-btn>
         </template>
 
-        <!-- Mobile -->
         <template v-else>
           <v-btn icon @click="drawer = true">
             <v-icon>mdi-menu</v-icon>
@@ -28,11 +26,11 @@
         <v-list-item @click="navAndClose('contact')">Kontakt</v-list-item>
       </v-list>
     </v-navigation-drawer>
-
     <v-main>
       <Home/>
       <Services/>
       <Contact/>
+      <Partner/>
       <Footer/>
     </v-main>
   </v-app>
@@ -44,6 +42,7 @@ import Contact from "./components/Contact.vue";
 import Services from "./components/Services.vue";
 import Footer from "./components/Footer.vue";
 import {ref, onMounted, onUnmounted} from 'vue'
+import Partner from "./components/Partner.vue";
 
 const drawer = ref(false)
 const isMobile = ref(false)

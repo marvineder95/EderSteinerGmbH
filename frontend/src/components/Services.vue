@@ -32,25 +32,29 @@ const services = [
     title: 'Umzüge',
     icon: 'mdi-truck-fast',
     description:
-        'Zuverlässige Umzüge für Privat- und Firmenkunden – sicher, pünktlich und stressfrei.'
+        'Wir bringen Sie sicher an Ihr Ziel – reibungslos, termingerecht und ohne Stress.' +
+        ' Ob privat oder geschäftlich: Unser erfahrenes Team sorgt dafür, dass Ihr Umzug entspannt und professionell abläuft.'
   },
   {
     title: 'Entrümpelungen',
     icon: 'mdi-delete-variant',
     description:
-        'Komplette Entrümpelungen von Wohnungen, Häusern und Büros – schnell und diskret.'
+        'Mehr Platz. Mehr Klarheit. Wir kümmern uns diskret und effizient um Entrümpelungen aller Art –' +
+        ' vom Keller bis zum Bürogebäude – und hinterlassen Räume, die bereit für Neues sind.'
   },
   {
     title: 'Lagerung',
     icon: 'mdi-warehouse',
     description:
-        'Flexible und sichere Lagerflächen für Möbel, Akten oder komplette Einrichtungen.'
+        'Sicher, flexibel, jederzeit zugänglich – unsere modernen Lagerflächen bieten den perfekten Platz für Ihre Möbel,' +
+        ' Akten oder kompletten Hausrat. Mit uns bleibt alles bestens geschützt und organisiert.'
   },
   {
     title: 'Sicherungsposten',
     icon: 'mdi-shield-account',
     description:
-        'Ausgebildete Sicherungsposten für Baustellen zur Gewährleistung von Sicherheit vor Ort.'
+        'Sicherheit, auf die Sie bauen können. Unsere geschulten Sicherungsposten überwachen Baustellen und' +
+        ' Verkehrsflächen zuverlässig und sorgen dafür, dass Abläufe geschützt und reibungslos funktionieren.'
   }
 ]
 </script>
