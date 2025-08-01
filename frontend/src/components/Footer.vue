@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="bg-grey-lighten-4 text-center" height="auto">
+  <v-footer class="bg-grey-lighten-1 text-center" height="auto">
     <v-container>
       <v-row justify="center">
         <v-col cols="12" md="8">

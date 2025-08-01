@@ -3,7 +3,7 @@
     <div class="overlay">
       <div class="hero-content">
         <h1 class="mt-8">Bewegen. Räumen. Lagern. – Ihr Partner für Umzüge & Entrümpelungen.</h1>
-        <v-btn color="white" class="mt-6" size="large">
+        <v-btn @click="scrollToContact" color="white" class="mt-6" size="large">
           Kostenloses Angebot anfordern
         </v-btn>
       </div>
@@ -12,6 +12,12 @@
 </template>
 
 <script setup lang="ts">
+function scrollToContact() {
+  const contactSection = document.getElementById('contact')
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <style scoped>

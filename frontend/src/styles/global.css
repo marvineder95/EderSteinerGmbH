@@ -1,0 +1,18 @@
+.services-title {
+    font-size: 2.5rem; /* größer */
+    font-weight: 700; /* fett */
+    text-align: center;
+    color: #2c3e50; /* dunkler Grauton */
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.services-title::after {
+    content: "";
+    display: block;
+    width: 80%;
+    margin: auto;
+    border-bottom: 3px solid #1976d2; /* Vuetify-Primärfarbe */
+    border-radius: 2px;
+}

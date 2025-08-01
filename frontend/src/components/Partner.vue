@@ -2,7 +2,6 @@
   <section id="partners" class="section">
     <v-container fluid class="pa-0 partners-banner">
       <div class="partners-slider">
-        <!-- Erste Liste -->
         <div
             v-for="(partner, index) in partners"
             :key="'first-' + index"
@@ -11,8 +10,8 @@
           <v-card class="pa-4 d-flex align-center justify-center" elevation="2">
             <v-img
                 :src="partner.logo"
-                max-width="120"
-                max-height="60"
+                width="180"
+                height="100"
                 contain
             />
           </v-card>
@@ -27,8 +26,8 @@
           <v-card class="pa-4 d-flex align-center justify-center" elevation="2">
             <v-img
                 :src="partner.logo"
-                max-width="120"
-                max-height="60"
+                width="180"
+                height="100"
                 contain
             />
           </v-card>
@@ -40,17 +39,17 @@
 
 <script setup lang="ts">
 const partners = [
-  { logo: '/images/BoxroomLogo.png' },
   { logo: '/images/Wirth&KollLogo.png' },
+  { logo: '/images/BoxroomLogo.png' },
   { logo: '/images/WohnfeeLogo.png' },
-  { logo: '/images/partner4.png' },
+  { logo: '/images/sincetodayLogo.png' },
   { logo: '/images/partner5.png' },
 ]
 </script>
 
 <style scoped>
 .partners-banner {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   overflow: hidden;
   height: 200px;
   position: relative;

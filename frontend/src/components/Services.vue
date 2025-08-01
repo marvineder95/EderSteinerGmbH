@@ -1,7 +1,7 @@
 <template>
-  <section id="services" class="section">
+  <section id="services" class="section bg-grey-lighten-1">
     <v-container class=" align-center justify-center text-center">
-      <h2 class="text-h4 mb-10">Unsere Leistungen</h2>
+      <h2 class="services-title">Unsere Leistungen</h2>
       <v-row>
         <v-col
             v-for="service in services"
@@ -10,11 +10,11 @@
             sm="6"
             md="3"
         >
-          <v-card class="pa-4 text-center" variant="elevated">
+          <v-card class="pa-4 text-center" variant="outlined" min-height="300px">
             <v-icon
                 :icon="service.icon"
-                size="48"
-                color="black"
+                size="72"
+                color="white"
                 class="mb-4"
             />
             <h3 class="text-h6 mb-2">{{ service.title }}</h3>
@@ -64,4 +64,14 @@ const services = [
   min-height: 100vh;
   padding: 80px 20px;
 }
+
+.v-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.v-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 </style>

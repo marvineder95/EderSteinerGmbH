@@ -1,7 +1,7 @@
 <template>
-  <section id="contact" class="section">
-    <v-container max-width="700px">
-      <h2 class="text-h4 mb-6 text-center">Kontakt</h2>
+  <section id="contact" class="section bg-grey-lighten-1">
+    <v-container class="text-center">
+      <h2 class="services-title">Kontakt</h2>
       <v-form v-model="valid" ref="formRef">
         <v-text-field
             v-model="form.name"
