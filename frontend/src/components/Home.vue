@@ -3,7 +3,7 @@
     <div class="overlay">
       <div class="hero-content">
         <h1 class="mt-8">Bewegen. Räumen. Lagern. – Ihr Partner für Umzüge & Entrümpelungen.</h1>
-        <v-btn @click="scrollToContact" color="white" class="mt-6" size="large">
+        <v-btn @click="scrollToContact" color="primary" class="mt-6" size="large">
           Kostenloses Angebot anfordern
         </v-btn>
       </div>
@@ -23,9 +23,9 @@ function scrollToContact() {
 <style scoped>
 .hero {
   position: relative;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
-  background-image: url('/images/backgroundImgHome.png');
+  background-image: url('/images/backGroundImgLkwInGreen.png');
   background-size: cover;
   background-position: center;
 }

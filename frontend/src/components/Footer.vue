@@ -1,6 +1,6 @@
 <template>
-  <v-footer class="bg-grey-lighten-1 text-center" height="auto">
-    <v-container>
+  <v-footer class="bg-primary text-center" height="auto">
+    <v-container class="footerValues">
       <v-row justify="center">
         <v-col cols="12" md="8">
           <div class="mb-4">
@@ -8,7 +8,7 @@
           </div>
           <v-row justify="center" no-gutters class="mb-4">
             <v-col cols="auto" class="px-3">
-              <a href="#!" class="footer-link">Impressum</a>
+              <router-link to="/impressum" class="footer-link">Impressum</router-link>
             </v-col>
             <v-col cols="auto" class="px-3">
               <a href="#!" class="footer-link">AGB</a>
@@ -33,13 +33,17 @@
 </script>
 
 <style scoped>
+.footerValues {
+  height: 18vh;
+}
 .footer-link {
-  text-decoration: none;
+  text-decoration: underline;
   color: inherit;
   font-weight: 500;
 }
 
 .footer-link:hover {
   text-decoration: underline;
+  font-weight: 600;
 }
 </style>

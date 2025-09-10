@@ -1,16 +1,16 @@
 <template>
   <v-app>
-      <v-app-bar color="grey-lighten-1" scroll-behavior="inverted" elevation="0">
+      <v-app-bar color="primary" scroll-behavior="inverted" elevation="0">
         <v-toolbar-title class="cursor-pointer" @click="scrollTo('home')">
           <v-img src="/images/Firmenlogo.png" width="50px" />
         </v-toolbar-title>
         <v-spacer></v-spacer>
 
         <template v-if="!isMobile">
-          <v-btn variant="text" @click="scrollTo('home')">Start</v-btn>
-          <v-btn variant="text" @click="scrollTo('services')">Leistungen</v-btn>
-          <v-btn variant="text" @click="scrollTo('about')">Über uns</v-btn>
-          <v-btn variant="text" @click="scrollTo('contact')">Kontakt</v-btn>
+          <v-btn variant="text" @click="$router.push('/')">Start</v-btn>
+          <v-btn variant="text" @click="$router.push('/services')">Leistungen</v-btn>
+          <v-btn variant="text" @click="$router.push('/aboutUs')">Über uns</v-btn>
+          <v-btn variant="text" @click="$router.push('/contact')">Kontakt</v-btn>
         </template>
 
         <template v-else>
@@ -20,7 +20,7 @@
         </template>
       </v-app-bar>
 
-    <v-navigation-drawer class="bg-grey-lighten-1" v-model="drawer" location="right" temporary>
+    <v-navigation-drawer class="bg-primary" v-model="drawer" location="right" temporary>
       <v-list>
         <v-list-item @click="navAndClose('home')">Start</v-list-item>
         <v-list-item @click="navAndClose('services')">Leistungen</v-list-item>
@@ -29,23 +29,16 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <Home/>
-      <Services/>
-      <AboutUs></AboutUs>
-      <Contact/>
-      <Partner/>
-      <Footer/>
+      <router-view />
+      <Partner v-if="$route.meta.showPartners" />
+      <Footer />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
-import Home from './components/Home.vue'
-import Contact from "./components/Contact.vue";
-import Services from "./components/Services.vue";
 import Footer from "./components/Footer.vue";
 import Partner from "./components/Partner.vue";
-import AboutUs from "./components/AboutUs.vue";
 import {ref, onMounted, onUnmounted} from 'vue'
 
 const drawer = ref(false)
@@ -81,7 +74,7 @@ function navAndClose(id: string) {
 </script>
 
 <style scoped>
-[v-cloak] {
-  display: none;
+.content-container {
+  height: calc(100vh - 40vh); /* Platz für Navbar + Footer */
 }
 </style>

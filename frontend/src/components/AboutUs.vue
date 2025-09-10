@@ -1,7 +1,7 @@
 <template>
-  <section id="about" class="section">
+  <section id="about" class="section bg-white">
     <v-container class="text-center">
-      <h2 class="services-title">Über uns</h2>
+      <h2 class="titleDesign text-primary">Über uns</h2>
       <p class="text-subtitle-1 mb-12">
         Persönlich. Zuverlässig. Mit Leidenschaft für unseren Beruf.
       </p>
@@ -56,5 +56,23 @@
 .section {
   min-height: 100vh;
   padding: 80px 20px;
+}
+
+.titleDesign {
+  font-size: 2.5rem; /* größer */
+  font-weight: 700; /* fett */
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.titleDesign::after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: auto;
+  border-bottom: 3px solid #000000; /* Vuetify-Primärfarbe */
+  border-radius: 2px;
 }
 </style>

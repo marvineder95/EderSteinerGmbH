@@ -1,6 +1,6 @@
 <template>
-  <section id="services" class="section bg-grey-lighten-1">
-    <v-container class=" align-center justify-center text-center">
+  <section id="services" class="section section--center bg-primary">
+    <v-container class="services-wrap align-center justify-center text-center">
       <h2 class="services-title">Unsere Leistungen</h2>
       <v-row>
         <v-col
@@ -60,18 +60,29 @@ const services = [
 </script>
 
 <style scoped>
-.section {
-  min-height: 100vh;
-  padding: 80px 20px;
+.section--center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.services-wrap {
+  margin-inline: auto;
+  padding-block: 40px;
+}
+
+.services-title {
+  margin: 0 0 24px;
 }
 
 .v-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform .3s ease, box-shadow .3s ease;
 }
-
 .v-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0,0,0,.2);
 }
 
+.section {
+}
 </style>

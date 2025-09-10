@@ -2,7 +2,7 @@
     font-size: 2.5rem; /* größer */
     font-weight: 700; /* fett */
     text-align: center;
-    color: #2c3e50; /* dunkler Grauton */
+    color: #ffffff; /* dunkler Grauton */
     position: relative;
     display: inline-block;
     padding-bottom: 10px;
@@ -13,6 +13,6 @@
     display: block;
     width: 80%;
     margin: auto;
-    border-bottom: 3px solid #1976d2; /* Vuetify-Primärfarbe */
+    border-bottom: 3px solid #000000; /* Vuetify-Primärfarbe */
     border-radius: 2px;
 }

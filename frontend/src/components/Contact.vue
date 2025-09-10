@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="section bg-grey-lighten-1">
+  <section id="contact" class="section bg-primary">
     <v-container class="text-center">
       <h2 class="services-title">Kontakt</h2>
       <v-form v-model="valid" ref="formRef">
@@ -32,7 +32,7 @@
             class="mb-4"
         />
         <div class="text-center">
-          <v-btn color="black" size="large" @click="submit">Absenden</v-btn>
+          <v-btn class="text-black" size="large" @click="submit">Absenden</v-btn>
         </div>
       </v-form>
     </v-container>

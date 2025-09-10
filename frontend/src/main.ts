@@ -1,26 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+
 import router from './router'
-import './styles/global.css'
 
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import vuetify from './plugins/vuetify'
 import '@mdi/font/css/materialdesignicons.css'
-import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
-const vuetify = createVuetify({
-    components,
-    directives,
-    icons: {
-        defaultSet: 'mdi',
-        aliases,
-        sets: {
-            mdi,
-        },
-    },
-})
+import './styles/global.css'
 
 createApp(App)
     .use(router)

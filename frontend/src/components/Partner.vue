@@ -1,34 +1,15 @@
 <template>
-  <section id="partners" class="section">
-    <v-container fluid class="pa-0 partners-banner">
-      <div class="partners-slider">
-        <div
-            v-for="(partner, index) in partners"
-            :key="'first-' + index"
-            class="partner-card"
-        >
+  <section class="partners-banner">
+    <v-container class="h-100 d-flex align-center">
+      <div class="partners-slider" :class="{'reduce-motion': prefersReducedMotion}">
+        <div v-for="(p,i) in partnersDoubled" :key="i" class="partner-card">
           <v-card class="pa-4 d-flex align-center justify-center" elevation="2">
             <v-img
-                :src="partner.logo"
-                width="180"
-                height="100"
-                contain
-            />
-          </v-card>
-        </div>
-
-        <!-- Zweite Liste (Duplikat für Endlos-Loop) -->
-        <div
-            v-for="(partner, index) in partners"
-            :key="'second-' + index"
-            class="partner-card"
-        >
-          <v-card class="pa-4 d-flex align-center justify-center" elevation="2">
-            <v-img
-                :src="partner.logo"
-                width="180"
-                height="100"
-                contain
+                :src="p.logo"
+                :alt="p.name"
+                width="160" height="90"
+                lazy-src="/images/placeholder-logo.png"
+                cover
             />
           </v-card>
         </div>
@@ -39,44 +20,22 @@
 
 <script setup lang="ts">
 const partners = [
-  { logo: '/images/Wirth&KollLogo.png' },
-  { logo: '/images/BoxroomLogo.png' },
-  { logo: '/images/WohnfeeLogo.png' },
-  { logo: '/images/sincetodayLogo.png' },
-  { logo: '/images/partner5.png' },
+  { name: 'Wirth & Koll', logo: '/images/Wirth&KollLogo.png' },
+  { name: 'Boxroom',     logo: '/images/BoxroomLogo.png' },
+  { name: 'Wohnfee',     logo: '/images/WohnfeeLogo.png' },
+  { name: 'sinceToday',  logo: '/images/sincetodayLogo.png' },
 ]
+const partnersDoubled = [...partners, ...partners]
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 </script>
 
 <style scoped>
-.partners-banner {
-  background-color: #ffffff;
-  overflow: hidden;
-  height: 200px;
-  position: relative;
-}
-
-.partners-slider {
-  display: flex;
-  gap: 24px;
-  width: max-content;
-  animation: scroll-left 25s linear infinite;
-}
-
-.partner-card {
-  flex: 0 0 auto;
-  width: 200px;
-}
-
-.partners-banner:hover .partners-slider {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.partners-banner{ background:#fff; height:200px; overflow:hidden }
+.partners-slider{ display:flex; gap:24px; width:max-content; animation:scroll 25s linear infinite }
+.partners-slider.reduce-motion{ animation:none }
+.partner-card{ flex:0 0 auto; width:200px }
+@keyframes scroll{
+  from{ transform: translateX(0) }
+  to  { transform: translateX(-50%) }
 }
 </style>
