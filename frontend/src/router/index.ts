@@ -7,7 +7,7 @@ import AboutUs from "../components/AboutUs.vue";
 import Partner from "../components/Partner.vue";
 
 const routes = [
-    { path: '/',          component: Home,      meta: { showPartners: true  } },
+    { path: '/',          component: Home,      meta: { showPartners: false  } },
     { path: '/services',  component: Services,  meta: { showPartners: true  } },
     { path: '/contact',   component: Contact,   meta: { showPartners: true  } },
     { path: '/aboutUs',   component: AboutUs, meta:{ showPartners: true } },

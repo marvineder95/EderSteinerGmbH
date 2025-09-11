@@ -16,3 +16,8 @@
     border-bottom: 3px solid #000000; /* Vuetify-Primärfarbe */
     border-radius: 2px;
 }
+
+.v-list-item--active {
+    background: rgba(255,255,255,.08);
+    font-weight: 600;
+}

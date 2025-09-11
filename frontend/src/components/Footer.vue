@@ -3,9 +3,6 @@
     <v-container class="footerValues">
       <v-row justify="center">
         <v-col cols="12" md="8">
-          <div class="mb-4">
-            <strong>Eder & Steiner GmbH</strong>
-          </div>
           <v-row justify="center" no-gutters class="mb-4">
             <v-col cols="auto" class="px-3">
               <router-link to="/impressum" class="footer-link">Impressum</router-link>

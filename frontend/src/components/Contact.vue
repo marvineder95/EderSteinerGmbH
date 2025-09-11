@@ -74,7 +74,7 @@ function submit() {
 
 <style scoped>
 .section {
-  min-height: 100vh;
+  min-height: 60vh;
   padding: 80px 20px;
 }
 </style>

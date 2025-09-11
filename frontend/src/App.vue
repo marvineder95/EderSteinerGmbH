@@ -22,17 +22,17 @@
 
     <v-navigation-drawer class="bg-primary" v-model="drawer" location="right" temporary>
       <v-list>
-        <v-list-item @click="navAndClose('home')">Start</v-list-item>
-        <v-list-item @click="navAndClose('services')">Leistungen</v-list-item>
-        <v-list-item @click="navAndClose('about')">Über uns</v-list-item>
-        <v-list-item @click="navAndClose('contact')">Kontakt</v-list-item>
+        <v-list-item link :to="'/'"          @click="drawer = false">Start</v-list-item>
+        <v-list-item link :to="'/services'"  @click="drawer = false">Leistungen</v-list-item>
+        <v-list-item link :to="'/aboutUs'"   @click="drawer = false">Über uns</v-list-item>
+        <v-list-item link :to="'/contact'"   @click="drawer = false">Kontakt</v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <router-view />
-      <Partner v-if="$route.meta.showPartners" />
-      <Footer />
+        <router-view/>
     </v-main>
+    <Partner v-if="$route.meta.showPartners" />
+    <Footer />
   </v-app>
 </template>
 
@@ -40,6 +40,7 @@
 import Footer from "./components/Footer.vue";
 import Partner from "./components/Partner.vue";
 import {ref, onMounted, onUnmounted} from 'vue'
+import router from "./router";
 
 const drawer = ref(false)
 const isMobile = ref(false)
@@ -67,14 +68,8 @@ function scrollTo(id: string) {
   }
 }
 
-function navAndClose(id: string) {
-  drawer.value = false
-  setTimeout(() => scrollTo(id), 300)
-}
 </script>
 
 <style scoped>
-.content-container {
-  height: calc(100vh - 40vh); /* Platz für Navbar + Footer */
-}
+
 </style>

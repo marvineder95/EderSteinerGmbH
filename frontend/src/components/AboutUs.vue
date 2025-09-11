@@ -1,5 +1,5 @@
 <template>
-  <section id="about" class="section bg-white">
+  <section id="about" class="section--auto bg-white">
     <v-container class="text-center">
       <h2 class="titleDesign text-primary">Über uns</h2>
       <p class="text-subtitle-1 mb-12">
@@ -53,11 +53,6 @@
 </template>
 
 <style scoped>
-.section {
-  min-height: 100vh;
-  padding: 80px 20px;
-}
-
 .titleDesign {
   font-size: 2.5rem; /* größer */
   font-weight: 700; /* fett */

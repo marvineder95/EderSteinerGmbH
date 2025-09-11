@@ -1,27 +1,28 @@
 <template>
   <section id="services" class="section section--center bg-primary">
     <v-container class="services-wrap align-center justify-center text-center">
-      <h2 class="services-title">Unsere Leistungen</h2>
-      <v-row>
-        <v-col
-            v-for="service in services"
-            :key="service.title"
-            cols="12"
-            sm="6"
-            md="3"
-        >
-          <v-card class="pa-4 text-center" variant="outlined" min-height="300px">
-            <v-icon
-                :icon="service.icon"
-                size="72"
-                color="white"
-                class="mb-4"
-            />
-            <h3 class="text-h6 mb-2">{{ service.title }}</h3>
-            <p class="text-body-2">{{ service.description }}</p>
-          </v-card>
-        </v-col>
-      </v-row>
+        <h2 class="services-title">Unsere Leistungen</h2>
+        <v-row>
+          <v-col
+              v-for="service in services"
+              :key="service.title"
+              cols="12"
+              sm="6"
+              md="3"
+          >
+            <v-card class="pa-4 text-center" variant="outlined" min-height="300px">
+              <v-icon
+                  :icon="service.icon"
+                  size="72"
+                  color="white"
+                  class="mb-4"
+              />
+              <h3 class="text-h6 mb-2">{{ service.title }}</h3>
+              <p class="text-body-2">{{ service.description }}</p>
+            </v-card>
+          </v-col>
+        </v-row>
+      <h2 class="services-titleInline mt-8 mb-n8">Firmen mit welchen wir heute schon erfolgreich zusammen arbeiten!</h2>
     </v-container>
   </section>
 </template>
@@ -61,7 +62,7 @@ const services = [
 
 <style scoped>
 .section--center {
-  height: 100%;
+  min-height: 60vh;
   display: flex;
   align-items: center;
 }
@@ -78,11 +79,10 @@ const services = [
 .v-card {
   transition: transform .3s ease, box-shadow .3s ease;
 }
+
 .v-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .2);
 }
 
-.section {
-}
 </style>

@@ -2,8 +2,8 @@
   <div class="hero" id="home">
     <div class="overlay">
       <div class="hero-content">
-        <h1 class="mt-8">Bewegen. Räumen. Lagern. – Ihr Partner für Umzüge & Entrümpelungen.</h1>
-        <v-btn @click="scrollToContact" color="primary" class="mt-6" size="large">
+        <p class="mt-8 hero-text">Bewegen. Räumen. Lagern. – Ihr Partner für Umzüge & Entrümpelungen.</p>
+        <v-btn variant="outlined" @click="scrollToContact" color="white" class="mt-6"  append-icon="mdi-arrow-right">
           Kostenloses Angebot anfordern
         </v-btn>
       </div>
@@ -23,7 +23,7 @@ function scrollToContact() {
 <style scoped>
 .hero {
   position: relative;
-  height: 100%;
+  min-height: 75vh;
   width: 100vw;
   background-image: url('/images/backGroundImgLkwInGreen.png');
   background-size: cover;
@@ -36,7 +36,7 @@ function scrollToContact() {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* dunkler Filter */
+  background: rgba(0, 0, 0, 0.7); /* dunkler Filter */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +54,26 @@ function scrollToContact() {
 }
 
 .hero-content p {
-  font-size: 1.5rem;
   line-height: 1.4;
+}
+
+.hero-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 600px) {
+  .hero-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .hero-text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  }
 }
 </style>
