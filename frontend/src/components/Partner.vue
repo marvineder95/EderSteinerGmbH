@@ -3,7 +3,7 @@
     <v-container class="h-100 d-flex align-center">
       <div class="partners-slider" :class="{'reduce-motion': prefersReducedMotion}">
         <div v-for="(p,i) in partnersDoubled" :key="i" class="partner-card">
-          <v-card class="pa-4 d-flex align-center justify-center" elevation="2" :href="p.url"
+          <v-card variant="text" class="pa-4 d-flex align-center justify-center" elevation="2" :href="p.url"
           target="_blank"
           rel="noopener noreferrer"
           :aria-label="`Partner: ${p.name}`">

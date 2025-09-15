@@ -1,54 +1,106 @@
 <template>
   <v-app>
-      <v-app-bar color="primary" scroll-behavior="inverted" elevation="0">
-        <v-toolbar-title class="cursor-pointer" @click="scrollTo('home')">
-          <v-img src="/images/Firmenlogo.png" width="50px" />
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
+    <v-app-bar color="primary" scroll-behavior="inverted" elevation="0">
+      <v-toolbar-title class="cursor-pointer" @click="$router.push('/')">
+        <v-img src="/images/Firmenlogo.png" width="50" />
+      </v-toolbar-title>
+      <v-spacer />
 
-        <template v-if="!isMobile">
-          <v-btn variant="text" @click="$router.push('/')">Start</v-btn>
-          <v-btn variant="text" @click="$router.push('/services')">Leistungen</v-btn>
-          <v-btn variant="text" @click="$router.push('/aboutUs')">Über uns</v-btn>
-          <v-btn variant="text" @click="$router.push('/contact')">Kontakt</v-btn>
-        </template>
+      <!-- Desktop-Navigation -->
+      <template v-if="!isMobile">
+        <v-btn variant="text" to="/">Start</v-btn>
 
-        <template v-else>
-          <v-btn icon @click="handleDrawer">
-            <v-icon>mdi-menu</v-icon>
-          </v-btn>
-        </template>
-      </v-app-bar>
+        <!-- Leistungen mit Dropdown -->
+        <v-menu open-on-hover transition="fade-transition" offset-y>
+          <template #activator="{ props }">
+            <v-btn variant="text" to="/services" v-bind="props" append-icon="mdi-chevron-down">
+              Leistungen
+            </v-btn>
+          </template>
 
+          <v-list density="comfortable">
+            <v-list-item :to="'/services'" link>
+              <v-list-item-title>Alle Leistungen</v-list-item-title>
+            </v-list-item>
+            <v-divider />
+            <v-list-item
+                v-for="item in serviceLinks"
+                :key="item.to"
+                :to="item.to"
+                link
+            >
+              <v-list-item-title>{{ item.label }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-btn variant="text" @click="$router.push('/aboutUs')">Über uns</v-btn>
+        <v-btn variant="text" @click="$router.push('/contact')">Kontakt</v-btn>
+        <v-btn variant="text" @click="$router.push('/reviews')">Kundenstimmen</v-btn>
+      </template>
+
+      <template v-else>
+        <v-btn icon @click="handleDrawer"><v-icon>mdi-menu</v-icon></v-btn>
+      </template>
+    </v-app-bar>
+
+    <!-- Mobile-Navigation -->
     <v-navigation-drawer class="bg-primary" v-model="drawer" location="right" temporary>
       <v-list>
-        <v-list-item link :to="'/'"          @click="drawer = false">Start</v-list-item>
-        <v-list-item link :to="'/services'"  @click="drawer = false">Leistungen</v-list-item>
-        <v-list-item link :to="'/aboutUs'"   @click="drawer = false">Über uns</v-list-item>
-        <v-list-item link :to="'/contact'"   @click="drawer = false">Kontakt</v-list-item>
+        <v-list-item link :to="'/'" @click="drawer = false">Start</v-list-item>
+
+        <!-- Leistungen als aufklappbare Gruppe -->
+        <v-list-group value="leistungen">
+          <template #activator="{ props }">
+            <v-list-item v-bind="props" title="Leistungen"/>
+          </template>
+
+          <v-list-item :to="'/services'" link @click="drawer = false">
+            <v-list-item-title>Alle Leistungen</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item
+              v-for="item in serviceLinks"
+              :key="item.to"
+              :to="item.to"
+              link
+              @click="drawer = false"
+          >
+            <v-list-item-title>{{ item.label }}</v-list-item-title>
+          </v-list-item>
+        </v-list-group>
+
+        <v-list-item link :to="'/aboutUs'" @click="drawer = false">Über uns</v-list-item>
+        <v-list-item link :to="'/contact'" @click="drawer = false">Kontakt</v-list-item>
+        <v-btn variant="text" @click="$router.push('/reviews')">Kundenstimmen</v-btn>
       </v-list>
     </v-navigation-drawer>
-    <v-main>
-        <router-view/>
+
+    <v-main class="d-flex flex-column min-h-screen">
+      <router-view class="flex-grow-1" />
+      <Footer class="mt-auto" />
     </v-main>
-    <Partner v-if="$route.meta.showPartners" />
-    <Footer />
   </v-app>
 </template>
 
 <script setup lang="ts">
-import Footer from "./components/Footer.vue";
-import Partner from "./components/Partner.vue";
-import {ref, onMounted, onUnmounted} from 'vue'
-import router from "./router";
+import Footer from './components/Footer.vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const drawer = ref(false)
 const isMobile = ref(false)
 
+// Links für das Dropdown (an deine Slugs anpassen)
+const serviceLinks = [
+  { label: 'Umzüge',          to: '/leistungen/umzuege' },
+  { label: 'Entrümpelungen',  to: '/leistungen/entruempelungen' },
+  { label: 'Lagerung',        to: '/leistungen/lagerung' },
+  { label: 'Sicherungsposten',to: '/leistungen/sicherungsposten' },
+]
+
 function handleDrawer() {
   drawer.value = !drawer.value
 }
-
 function handleResize() {
   isMobile.value = window.innerWidth < 900
 }
@@ -56,20 +108,7 @@ onMounted(() => {
   handleResize()
   window.addEventListener('resize', handleResize)
 })
-
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
 })
-
-function scrollTo(id: string) {
-  const el = document.getElementById(id)
-  if (el) {
-    el.scrollIntoView({behavior: 'smooth'})
-  }
-}
-
 </script>
-
-<style scoped>
-
-</style>

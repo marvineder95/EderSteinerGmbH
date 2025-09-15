@@ -1,7 +1,7 @@
 <template>
-  <v-footer class="bg-primary text-center" height="auto">
-    <v-container class="footerValues">
-      <v-row justify="center">
+  <v-footer class="bg-primary text-center">
+    <v-container>
+      <v-row class="justify-center">
         <v-col cols="12" md="8">
           <v-row justify="center" no-gutters class="mb-4">
             <v-col cols="auto" class="px-3">
@@ -30,9 +30,6 @@
 </script>
 
 <style scoped>
-.footerValues {
-  height: 18vh;
-}
 .footer-link {
   text-decoration: underline;
   color: inherit;

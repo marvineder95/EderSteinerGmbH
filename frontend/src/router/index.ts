@@ -5,14 +5,20 @@ import Contact from '../components/Contact.vue'
 import Impressum from "../components/Impressum.vue";
 import AboutUs from "../components/AboutUs.vue";
 import Partner from "../components/Partner.vue";
+import ServiceDetail from "../components/ServiceDetail.vue";
+import Review from "../components/Review.vue";
+import CreateReview from "../components/CreateReview.vue";
 
 const routes = [
-    { path: '/',          component: Home,      meta: { showPartners: false  } },
-    { path: '/services',  component: Services,  meta: { showPartners: true  } },
-    { path: '/contact',   component: Contact,   meta: { showPartners: true  } },
-    { path: '/aboutUs',   component: AboutUs, meta:{ showPartners: true } },
-    { path: '/partner',   component: Partner, meta:{ showPartners: false } },
-    { path: '/impressum', component: Impressum, meta:{ showPartners: false } },
+    { path: '/',          component: Home,      },
+    { path: '/services',  component: Services,  },
+    { path: '/leistungen/:slug', name: 'service-detail', component: ServiceDetail, props: true, },
+    { path: '/contact',   component: Contact,   },
+    { path: '/aboutUs',   component: AboutUs, },
+    { path: '/partner',   component: Partner, },
+    { path: '/impressum', component: Impressum, },
+    { path: '/reviews', component: Review},
+    { path: '/reviews/new', name: 'reviews-new', component: CreateReview},
 ]
 
 const router = createRouter({

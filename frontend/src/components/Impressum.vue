@@ -1,5 +1,5 @@
 <template>
-  <section class="pa-8">
+  <section class="pa-8 section">
     <h1>Impressum</h1>
     <p><strong>Eder & Steiner GmbH</strong></p>
     <p>Musterstraße 1<br />1234 Wien<br />Österreich</p>
@@ -24,5 +24,9 @@
 <style scoped>
 h1 {
   margin-bottom: 20px;
+}
+
+.section {
+  min-height: 80vh;
 }
 </style>

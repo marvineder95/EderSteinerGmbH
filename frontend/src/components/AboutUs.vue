@@ -1,11 +1,7 @@
 <template>
-  <section id="about" class="section--auto bg-white">
+  <section id="about" class="section section--auto bg-white">
     <v-container class="text-center">
       <h2 class="titleDesign text-primary">Über uns</h2>
-      <p class="text-subtitle-1 mb-12">
-        Persönlich. Zuverlässig. Mit Leidenschaft für unseren Beruf.
-      </p>
-
       <v-row class="justify-center align-center mb-10">
         <v-col cols="12" md="4">
           <v-card elevation="2" class="pa-4">
@@ -38,10 +34,9 @@
           </v-card>
         </v-col>
       </v-row>
-
       <v-row class="justify-center">
         <v-col cols="12" md="8">
-          <p class="text-body-1">
+          <p class="text-body-1 mt-n6">
             Gemeinsam stehen wir hinter der Eder & Steiner GmbH. Für uns bedeutet ein Auftrag mehr,
             als nur Dinge von A nach B zu bringen. Wir wollen unseren Kunden das Gefühl geben,
             in den besten Händen zu sein – mit Zuverlässigkeit, Sorgfalt und Respekt.
@@ -53,6 +48,9 @@
 </template>
 
 <style scoped>
+.section {
+  min-height: 80vh;
+}
 .titleDesign {
   font-size: 2.5rem; /* größer */
   font-weight: 700; /* fett */
