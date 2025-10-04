@@ -9,7 +9,6 @@ type PagePayload<T> =
     | { items?: T[]; page?: number; total_pages?: number }   // alternative
 
 function normalizePage<T>(raw: PagePayload<T>) {
-    // Entpacken, falls Axios-Response gewrappt ist (z.B. { data: ... })
     const data: any = (raw as any)?.data ?? raw
 
     const items: T[] =

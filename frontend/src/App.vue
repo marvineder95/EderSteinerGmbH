@@ -11,7 +11,7 @@
         <v-btn variant="text" to="/">Start</v-btn>
 
         <!-- Leistungen mit Dropdown -->
-        <v-menu open-on-hover transition="fade-transition" offset-y>
+        <v-menu open-on-hover offset-y>
           <template #activator="{ props }">
             <v-btn variant="text" to="/services" v-bind="props" append-icon="mdi-chevron-down">
               Leistungen
@@ -22,7 +22,7 @@
             <v-list-item :to="'/services'" link>
               <v-list-item-title>Alle Leistungen</v-list-item-title>
             </v-list-item>
-            <v-divider />
+            <v-divider thickness="2px" color="black"/>
             <v-list-item
                 v-for="item in serviceLinks"
                 :key="item.to"

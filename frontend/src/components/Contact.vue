@@ -1,10 +1,10 @@
 <template>
-  <section id="contact" class="section bg-primary">
+  <section id="contact" class="section">
     <v-container class="align-center justify-center text-center">
       <v-row justify="center">
         <v-col cols="12" md="8" lg="6">
-          <v-card class="contact-card" elevation="16" variant="tonal">
-            <v-card-text>
+          <v-card class="about-card" color="primary" rounded="xl">
+            <v-card-text class="scrollable-content">
               <h2 class="services-title text-center mb-6">Kontakt</h2>
 
               <!-- Erfolg -->
@@ -241,15 +241,17 @@ async function submit() {
 
 <style scoped>
 .section {
-  padding-bottom: 64px;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
-.contact-card {
+.about-card {
+  max-width: 1000px;
+  width: 100%;
+  max-height: 70vh; /* Höhe begrenzen, damit man scrollen kann */
   border-radius: 20px;
-  backdrop-filter: blur(6px);
+  overflow: hidden; /* Scrollbar nur im Inneren */
 }
 
-:deep(.v-field__input) {
-  min-height: 52px;
-}
 </style>
