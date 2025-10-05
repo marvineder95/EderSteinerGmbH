@@ -143,23 +143,28 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useContactStore} from "../stores/contact.ts";
 
 const router = useRouter()
+const contact = useContactStore()                     // ← NEU
 
-// form state
+// form state (lokal)
 const form = ref()
 const valid = ref(false)
-const loading = ref(false)
-const success = ref(false)
 const consent = ref(false)
+
+// über Store gemappte Zustände
+const loading  = computed(() => contact.sending)
+const success  = computed(() => contact.ok)
+const errText  = computed(() => contact.error)
+
+// Snackbar nur für Success (Fehler zeigen wir optional separat)
 const snack = ref(false)
 
-// countdown state (nur nach Erfolg aktiv)
+// countdown state nur nach Erfolg
 const countdown = ref(5)
 let timer: number | undefined
-
 function startRedirectTimer() {
-  // Sicherheitsreset
   clearTimer()
   countdown.value = 5
   timer = window.setInterval(() => {
@@ -170,50 +175,32 @@ function startRedirectTimer() {
     }
   }, 1000)
 }
-function clearTimer() {
-  if (timer) {
-    clearInterval(timer)
-    timer = undefined
-  }
-}
-function goHome() {
-  router.push('/')
-}
+function clearTimer() { if (timer) { clearInterval(timer); timer = undefined } }
+function goHome() { router.push('/') }
 
-// wenn success -> Timer starten; bei Rückkehr/Unmount abbrechen
-watch(success, v => {
-  if (v) startRedirectTimer()
-})
-onUnmounted(clearTimer)
+// Timer bei Erfolg starten, bei Unmount aufräumen
+watch(success, (v) => { if (v) { snack.value = true; startRedirectTimer() } })
+onUnmounted(() => { clearTimer(); contact.reset() })   // ← NEU
 
 // UI-Daten
 const topics = [
-  'Umzug (privat)',
-  'Umzug (gewerblich)',
-  'Entrümpelung',
-  'Lagerung',
-  'Sicherungsposten',
-  'Allgemeine Anfrage'
+  'Umzug (privat)', 'Umzug (gewerblich)', 'Entrümpelung',
+  'Lagerung', 'Sicherungsposten', 'Allgemeine Anfrage'
 ]
 
 const model = ref({
-  name: '',
-  email: '',
-  phone: '',
-  topic: '',
-  date: null as string | null,
-  message: ''
+  name: '', email: '', phone: '', topic: '',
+  date: null as string | null, message: ''
 })
 
 const r = {
   required: (v: any) => !!v || 'Pflichtfeld',
   email: (v: string) =>
-      !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Bitte gültige E-Mail eingeben'
+      !v || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || 'Bitte gültige E-Mail eingeben',
 }
 
 // DatePicker – keine Vergangenheit
-const d = new Date()
-d.setDate(d.getDate() + 1)
+const d = new Date(); d.setDate(d.getDate() + 1)
 const tomorrow = d.toISOString().split('T')[0]
 
 const dateMenu = ref(false)
@@ -221,20 +208,23 @@ const dateText = computed(() =>
     model.value.date ? new Date(model.value.date).toLocaleDateString() : ''
 )
 
+// ABSENDEN → ruft den Store
 async function submit() {
   const ok = await form.value?.validate()
   if (!ok.valid) return
 
-  loading.value = true
   try {
-    // TODO: hier an dein Backend / E-Mail-Service senden
-    await new Promise(res => setTimeout(res, 1200))
-    loading.value = false
-    success.value = true
-    snack.value = true
-  } catch (e) {
-    loading.value = false
-    // Optional: Fehlerbehandlung / Snackbar
+    await contact.send({
+      name: model.value.name,
+      email: model.value.email,
+      phone: model.value.phone || undefined,
+      topic: model.value.topic,
+      date: model.value.date,
+      message: model.value.message,
+    })
+    // bei Erfolg: success wird via Store „ok=true“ → watch(success) startet Timer & Snackbar
+  } catch {
+    // Fehler wird im Store gesetzt (contact.error)
   }
 }
 </script>

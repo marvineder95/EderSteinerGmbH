@@ -1,29 +1,26 @@
-// src/stores/reviews.ts
 import { defineStore } from 'pinia'
 import { api} from "../service/api.ts";
 import type { Review } from '@/types/reviews'
 
 type PagePayload<T> =
-    | T[]                                 // plain array
-    | { content?: T[]; page?: number; totalPages?: number } // Spring Page
-    | { items?: T[]; page?: number; total_pages?: number }   // alternative
+    | T[]
+    | { content?: T[]; page?: number; totalPages?: number }
+    | { items?: T[]; page?: number; total_pages?: number }
 
-function normalizePage<T>(raw: PagePayload<T>) {
-    const data: any = (raw as any)?.data ?? raw
-
+function normalizePage<T>(data: PagePayload<T>) {
     const items: T[] =
-        Array.isArray(data) ? data :
-            Array.isArray(data?.content) ? data.content :
-                Array.isArray(data?.items) ? data.items :
-                    []
+        Array.isArray(data) ? data
+            : Array.isArray((data as any)?.content) ? (data as any).content
+                : Array.isArray((data as any)?.items) ? (data as any).items
+                    : []
 
     const page =
-        typeof data?.page === 'number' ? data.page : 0
+        typeof (data as any)?.page === 'number' ? (data as any).page : 0
 
     const totalPages =
-        typeof data?.totalPages === 'number' ? data.totalPages :
-            typeof data?.total_pages === 'number' ? data.total_pages :
-                1
+        typeof (data as any)?.totalPages === 'number' ? (data as any).totalPages
+            : typeof (data as any)?.total_pages === 'number' ? (data as any).total_pages
+                : 1
 
     return { items, page, totalPages }
 }
@@ -35,27 +32,34 @@ export const useReviewsStore = defineStore('reviews', {
         size: 10,
         totalPages: 1,
         loading: false,
-        error: '' as string | null,
+        error: null as string | null,
     }),
 
+    getters: {
+        hasMore: (s) => s.page + 1 < s.totalPages,
+        count: (s) => s.list.length,
+    },
+
     actions: {
+        reset() {
+            this.list = []
+            this.page = 0
+            this.totalPages = 1
+            this.error = null
+        },
+
         async fetchPage(page = 0) {
             this.loading = true
             this.error = null
             try {
-                const res = await api.get('/reviews', { params: { page, size: this.size } })
-                const { items, page: srvPage, totalPages } = normalizePage<Review>(res)
+                const data = await api.get('/reviews', { params: { page, size: this.size } })
+                const { items, page: srvPage, totalPages } = normalizePage<Review>(data)
 
-                if (page === 0) {
-                    this.list = items
-                } else {
-                    this.list = [...this.list, ...items]
-                }
+                this.list = page === 0 ? items : [...this.list, ...items]
                 this.page = srvPage
                 this.totalPages = totalPages
             } catch (e: any) {
                 this.error = e?.message ?? 'Fehler beim Laden der Bewertungen'
-                // Bei Fehler nicht crashen lassen
                 if (page === 0) this.list = []
             } finally {
                 this.loading = false
@@ -66,20 +70,15 @@ export const useReviewsStore = defineStore('reviews', {
             this.loading = true
             this.error = null
             try {
-                const res = await api.post('/reviews', payload)
-                // Viele APIs geben das erstellte Objekt zurück. Falls nicht, neu laden.
-                const created: Review = (res as any)?.data ?? (res as any)
-                if (created && created.id) {
-                    this.list = [created, ...this.list]
-                } else {
-                    await this.fetchPage(0)
-                }
+                const created = await api.post('/reviews', payload) as Review
+                if (created?.id) this.list = [created, ...this.list]
+                else await this.fetchPage(0)
             } catch (e: any) {
                 this.error = e?.message ?? 'Bewertung konnte nicht gespeichert werden'
                 throw e
             } finally {
                 this.loading = false
             }
-        }
-    }
+        },
+    },
 })

@@ -9,15 +9,12 @@
           <v-card elevation="12" class="pa-6 review-card" variant="tonal">
             <v-form v-model="valid" @submit.prevent="submit">
               <v-text-field
-                  v-model="form.token"
+                  v-model="form.code"
                   label="Bewertungs-Code (z. B. ES-7K3Q-2M9A)"
                   prepend-inner-icon="mdi-key-variant"
                   variant="outlined"
-                  :rules="[rules.required]"
-                  @blur="checkToken"
-                  :loading="checking"
-                  :error="tokenTouched && !tokenValid"
-                  :error-messages="tokenTouched && !tokenValid ? ['Code ungültig oder bereits verwendet'] : []"
+                  :error-messages="fieldError ? [fieldError] : []"
+                  autocomplete="off"
                   class="mb-4"
               />
 
@@ -26,6 +23,7 @@
                   label="Ihr Name (optional, z. B. Frau H.)"
                   prepend-inner-icon="mdi-account"
                   variant="outlined"
+                  autocomplete="off"
                   class="mb-4"
               />
 
@@ -40,11 +38,12 @@
                   counter="800"
                   :rules="[rules.required]"
                   prepend-inner-icon="mdi-text"
+                  autocomplete="off"
                   class="mb-6"
               />
 
               <v-btn
-                  :disabled="!valid || !tokenValid || loading"
+                  :disabled="!valid || loading"
                   :loading="loading"
                   color="white"
                   variant="outlined"
@@ -83,7 +82,7 @@ const valid = ref(false)
 const loading = ref(false)
 
 const form = reactive({
-  token: '',
+  code: '',
   name: '',
   rating: 5,
   text: '',
@@ -91,39 +90,17 @@ const form = reactive({
 
 const rules = { required: (v: any) => !!v || 'Pflichtfeld' }
 
-const checking = ref(false)
-const tokenValid = ref(false)
-const tokenTouched = ref(false)
+const fieldError = ref<string | null>(null)
 
 const snack = reactive({ ok: false, err: false })
 const errorMsg = ref('')
 
-onMounted(async () => {
-  const qp = (route.query.code as string) || ''
-  if (qp) {
-    form.token = qp.toUpperCase()
-    await checkToken()
-  }
-})
-
-async function checkToken() {
-  tokenTouched.value = true
-  if (!form.token) { tokenValid.value = false; return }
-  checking.value = true
-  try {
-    tokenValid.value = await store.validateToken(form.token)
-  } catch {
-    tokenValid.value = false
-  } finally {
-    checking.value = false
-  }
-}
-
 async function submit() {
   try {
     loading.value = true
-    await store.createReview({
-      token: form.token.trim().toUpperCase(),
+    fieldError.value = null
+    await store.create({
+      code: form.code.trim().toUpperCase(),
       name : form.name?.trim() || undefined,
       rating: form.rating,
       text: form.text.trim(),
@@ -131,8 +108,14 @@ async function submit() {
     snack.ok = true
     setTimeout(() => router.push('/reviews'), 800)
   } catch (e: any) {
-    errorMsg.value = e?.response?.data?.message || 'Senden fehlgeschlagen.'
-    snack.err = true
+    const status = e?.response?.status
+    const reason = e?.response?.data?.reason || e?.response?.data?.error
+    if (status === 400 && (reason === 'INVALID_CODE' || reason === 'CODE_USED' || reason === 'CODE_EXPIRED')) {
+      fieldError.value = 'Code ungültig oder bereits verwendet'
+    } else {
+      errorMsg.value = e?.response?.data?.message || 'Senden fehlgeschlagen.'
+      snack.err = true
+    }
   } finally {
     loading.value = false
   }

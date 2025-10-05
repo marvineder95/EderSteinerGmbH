@@ -7,7 +7,7 @@ export interface ReviewDto {
 }
 
 export interface CreateReviewRequest {
-    token: string
+    code: string
     name?: string
     rating: number
     text: string

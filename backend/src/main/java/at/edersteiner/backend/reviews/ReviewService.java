@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 public class ReviewService {
 
     private final ReviewRepository repo;
+    private final ReviewCodeService reviewCodeService;
 
     @Value("${app.reviews.requireCode:false}")
-    private boolean requireCode;
+    private final boolean requireCode = true;
 
-    public ReviewService(ReviewRepository repo) {
+    public ReviewService(ReviewRepository repo, ReviewCodeService reviewCodeService) {
         this.repo = repo;
+        this.reviewCodeService = reviewCodeService;
     }
 
     public PageDto<ReviewDto> list(int page, int size) {
@@ -38,9 +40,12 @@ public class ReviewService {
         r.setName(req.name());
         r.setRating(req.rating());
         r.setText(req.text());
-        // ggf. Moderation:
-        // r.setPublished(false);
+        r.setPublished(true);
         r = repo.save(r);
+        // Code „verbrauchen“
+        if (requireCode) {
+            reviewCodeService.consume(req.code().trim().toUpperCase(), r);
+        }
         return toDto(r);
     }
 
