@@ -1,16 +1,9 @@
 <template>
   <section id="services" class="section bg-primary">
     <v-container class="services-wrap align-center justify-center text-center">
-      <h2 class="services-title">Unsere Leistungen</h2>
-      <v-row>
-        <v-col
-            v-for="service in services"
-            :key="service.slug"
-            cols="12"
-            sm="6"
-            md="3"
-        >
-          <!-- v-card kann direkt als Router-Link verwendet werden -->
+      <h2 class="services-title mb-5">Unsere Leistungen</h2>
+      <v-row justify="center">
+        <v-col v-for="service in services" :key="service.slug" cols="12" sm="6" md="4">
           <v-card
               class="pa-4 d-flex flex-column align-center justify-center text-center service-card"
               variant="outlined"
@@ -18,11 +11,11 @@
               :to="{ name: 'service-detail', params: { slug: service.slug } }"
               hover
           >
-            <v-icon :icon="service.icon" size="72" color="white" class="mb-4" />
+            <v-icon :icon="service.icon" size="72" color="white" class="mb-4"/>
             <h3 class="text-h6 mb-2">{{ service.title }}</h3>
             <p class="text-body-2">{{ service.description }}</p>
 
-            <v-btn variant="text" class="mt-3" append-icon="mdi-arrow-right">
+            <v-btn variant="outlined" class="mt-3" append-icon="mdi-arrow-right">
               Mehr erfahren
             </v-btn>
           </v-card>
@@ -34,7 +27,7 @@
       </h2>
     </v-container>
 
-    <Partner />
+    <Partner/>
   </section>
 </template>
 
@@ -62,13 +55,6 @@ const services = [
     icon: 'mdi-warehouse',
     description:
         'Sicher, flexibel, jederzeit zugänglich – unsere modernen Lagerflächen bieten den perfekten Platz für Ihre Möbel, Akten oder kompletten Hausrat. Mit uns bleibt alles bestens geschützt und organisiert.'
-  },
-  {
-    slug: 'sicherungsposten',
-    title: 'Sicherungsposten',
-    icon: 'mdi-shield-account',
-    description:
-        'Unsere geschulten Sicherungsposten überwachen Baustellen und Verkehrsflächen zuverlässig und sorgen dafür, dass Abläufe geschützt und reibungslos funktionieren.'
   }
 ]
 </script>
@@ -77,8 +63,6 @@ const services = [
 .section {
   min-height: 80vh;
 }
-
-/* kleines UX-Detail: „klickbar“-Cursor auf Karten */
 .service-card {
   cursor: pointer;
 }

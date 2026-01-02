@@ -1,70 +1,181 @@
 <template>
-  <section id="about" class="section bg-white">
-    <v-container class="d-flex justify-center align-center text-center">
-      <v-card class="about-card" color="primary" elevation="10">
-        <v-card-text class="scrollable-content">
-          <h2 class="services-title text-center mb-8">Über uns</h2>
+  <section id="services" class="section bg-primary">
+    <v-container class="services-wrap align-center justify-center text-center">
+      <h2 class="services-title mb-5">Über uns</h2>
 
-          <v-row class="justify-center align-center mb-10">
-            <v-col cols="12" md="6">
-              <v-card elevation="2" class="pa-4" rounded="xl">
-                <v-img
-                    src="/images/SteinerBild.png"
-                    aspect-ratio="1"
-                    class="mb-4"
-                />
-                <h3 class="text-h6 mb-2">Thomas Steiner</h3>
-                <p class="text-body-2">
-                  Geschäftsführer – Mit jahrelanger Erfahrung im Bereich Umzüge und Logistik
-                  kümmert er sich um reibungslose Abläufe und zufriedene Kunden.
-                </p>
-              </v-card>
-            </v-col>
+      <!-- Team -->
+      <v-row justify="center" class="mb-12">
+        <v-col
+            v-for="person in team"
+            :key="person.name"
+            cols="12"
+            md="6"
+        >
+          <v-card variant="outlined" class="person-card bg-primary" rounded="xl">
+            <v-img :src="person.image" height="220" class="mt-5" />
 
-            <v-col cols="12" md="6">
-              <v-card elevation="2" class="pa-4" rounded="xl">
-                <v-img
-                    src="/images/EderBild.png"
-                    aspect-ratio="1"
-                    class="mb-4"
-                />
-                <h3 class="text-h6 mb-2">Marvin Eder</h3>
-                <p class="text-body-2">
-                  Geschäftsführer – Organisiert, motiviert und immer nah an den Kundenwünschen,
-                  sorgt er für Qualität und eine persönliche Betreuung.
-                </p>
-              </v-card>
-            </v-col>
-          </v-row>
+            <div class="person-content">
+              <h3 class="person-name">{{ person.name }}</h3>
+              <div class="person-role">{{ person.role }}</div>
 
-          <v-row class="justify-center">
-            <v-col cols="12" md="10">
-              <p class="text-body-1">
-                Gemeinsam stehen wir hinter der Eder & Steiner GmbH. Für uns bedeutet ein Auftrag mehr,
-                als nur Dinge von A nach B zu bringen. Wir wollen unseren Kunden das Gefühl geben,
-                in den besten Händen zu sein – mit Zuverlässigkeit, Sorgfalt und Respekt.
+              <p class="person-text">
+                {{ person.text }}
               </p>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
+
+              <div class="person-tags" aria-label="Schwerpunkte">
+                <v-chip v-for="(tag, i) in person.points" :key="`${person.name}-${i}`" class="person-chip" variant="outlined" size="small">
+                  {{ tag }}
+                </v-chip>
+              </div>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <!-- Werte / Statement -->
+      <v-row justify="center">
+        <v-col cols="12" md="10">
+          <v-card variant="outlined" class="values-card" elevation="3" rounded="xl">
+            <h3 class="values-title">Unsere Arbeitsweise</h3>
+
+            <p class="values-text">
+              Für uns bedeutet ein Auftrag mehr, als Dinge von A nach B zu bringen.
+              Wir stehen für saubere Arbeit, transparente Angebote und einen respektvollen Umgang
+              mit Ihrem Eigentum.
+            </p>
+
+            <v-row class="values-grid">
+              <v-col cols="12" sm="6">
+                <div class="value-item">
+                  <v-icon icon="mdi-check-circle-outline" />
+                  <span>Zuverlässig & termingerecht</span>
+                </div>
+              </v-col>
+
+              <v-col cols="12" sm="6">
+                <div class="value-item">
+                  <v-icon icon="mdi-cash-check" />
+                  <span>Transparente Pauschalangebote</span>
+                </div>
+              </v-col>
+
+              <v-col cols="12" sm="6">
+                <div class="value-item">
+                  <v-icon icon="mdi-package-variant-closed" />
+                  <span>Sorgfältiger Umgang mit Ihrem Eigentum</span>
+                </div>
+              </v-col>
+
+              <v-col cols="12" sm="6">
+                <div class="value-item">
+                  <v-icon icon="mdi-account-group-outline" />
+                  <span>Persönliche Ansprechpartner</span>
+                </div>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </section>
 </template>
 
+<script setup lang="ts">
+type TeamMember = {
+  name: string
+  role: string
+  image: string
+  text: string
+  points: string[]
+}
+
+const team: TeamMember[] = [
+  {
+    name: 'Thomas Steiner',
+    role: 'Gesellschafter',
+    image: '/images/SteinerBild.png',
+    text:
+        'Mit jahrelanger Erfahrung im Bereich Umzüge und Logistik sorgt Thomas für strukturierte Abläufe, verlässliche Planung und eine saubere Umsetzung.',
+    points: ['Organisation & Ablaufplanung', 'Logistik & Transport', 'Termintreue']
+  },
+  {
+    name: 'Marvin Eder',
+    role: 'Geschäftsführer',
+    image: '/images/EderBild.png',
+    text:
+        'Marvin ist Ihr direkter Ansprechpartner – von der ersten Anfrage bis zur Umsetzung. Klar, lösungsorientiert und immer erreichbar.',
+    points: ['Kundenbetreuung', 'Angebotserstellung', 'Qualitätssicherung']
+  }
+]
+</script>
+
 <style scoped>
-.section {
-  min-height: 80vh;
+/* Team Cards */
+.person-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.person-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.person-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.person-role {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 12px;
+}
+
+.person-text {
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.person-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: center; /* horizontal zentrieren */
+}
+
+.person-chip {
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* Werte */
+.values-card {
+  padding: 28px;
+}
+
+.values-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.values-text {
+  margin-bottom: 20px;
+}
+
+.value-item {
   display: flex;
   align-items: center;
+  gap: 10px;
+  font-size: 14px;
 }
-
-.about-card {
-  max-width: 1000px;
-  width: 100%;
-  max-height: 70vh; /* Höhe begrenzen, damit man scrollen kann */
-  border-radius: 20px;
-  overflow: hidden; /* Scrollbar nur im Inneren */
-}
-
 </style>

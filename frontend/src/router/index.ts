@@ -8,6 +8,8 @@ import Partner from "../components/Partner.vue";
 import ServiceDetail from "../components/ServiceDetail.vue";
 import Review from "../components/Review.vue";
 import CreateReview from "../components/CreateReview.vue";
+import Agb from "../components/Agb.vue";
+import Datasecurity from "../components/Datasecurity.vue";
 
 const routes = [
     { path: '/',          component: Home,      },
@@ -17,6 +19,8 @@ const routes = [
     { path: '/aboutUs',   component: AboutUs, },
     { path: '/partner',   component: Partner, },
     { path: '/impressum', component: Impressum, },
+    { path: '/agb', component: Agb, },
+    { path: '/datenschutz', component: Datasecurity, },
     { path: '/reviews', component: Review},
     { path: '/reviews/new', name: 'reviews-new', component: CreateReview},
 ]

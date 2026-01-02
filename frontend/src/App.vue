@@ -1,8 +1,12 @@
 <template>
   <v-app>
     <v-app-bar color="primary" scroll-behavior="inverted" elevation="0">
-      <v-toolbar-title class="cursor-pointer" @click="$router.push('/')">
-        <v-img src="/images/Firmenlogo.png" width="50" />
+      <v-toolbar-title class="cursor-pointer ms-n8" @click="$router.push('/')">
+        <v-img
+            src="/es-logo.png"
+            alt="Eder & Steiner GmbH"
+            height="80"
+        />
       </v-toolbar-title>
       <v-spacer />
 
@@ -90,12 +94,10 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const drawer = ref(false)
 const isMobile = ref(false)
 
-// Links für das Dropdown (an deine Slugs anpassen)
 const serviceLinks = [
   { label: 'Umzüge',          to: '/leistungen/umzuege' },
   { label: 'Entrümpelungen',  to: '/leistungen/entruempelungen' },
   { label: 'Lagerung',        to: '/leistungen/lagerung' },
-  { label: 'Sicherungsposten',to: '/leistungen/sicherungsposten' },
 ]
 
 function handleDrawer() {

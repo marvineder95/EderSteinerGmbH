@@ -8,10 +8,10 @@
               <router-link to="/impressum" class="footer-link">Impressum</router-link>
             </v-col>
             <v-col cols="auto" class="px-3">
-              <a href="#!" class="footer-link">AGB</a>
+              <a href="/agb" class="footer-link">AGB</a>
             </v-col>
             <v-col cols="auto" class="px-3">
-              <a href="#!" class="footer-link">Datenschutz</a>
+              <a href="/datenschutz" class="footer-link">Datenschutz</a>
             </v-col>
           </v-row>
           <div class="text-body-2 mb-2">

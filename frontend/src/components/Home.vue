@@ -2,7 +2,7 @@
   <div class="hero" id="home">
     <div class="overlay">
       <div class="hero-content">
-        <p class="mt-8 hero-text">Bewegen. Räumen. Lagern. – Ihr Partner für Umzüge & Entrümpelungen.</p>
+        <p class="mt-8 hero-text">Bewegen. Räumen. Lagern. <br>Ihr Partner für Umzüge & Entrümpelungen</p>
         <v-btn variant="outlined" to="/contact" color="white" class="mt-6"  append-icon="mdi-arrow-right">
           Kostenloses Angebot anfordern
         </v-btn>

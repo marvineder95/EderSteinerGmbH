@@ -10,11 +10,10 @@
 
 .services-title::after {
     content: "";
-    display: block;
-    width: 80%;
-    margin: auto;
-    border-bottom: 3px solid #000000; /* Vuetify-Primärfarbe */
-    border-radius: 2px;
+    display: flex;
+    width: 100%;
+    border-bottom: 3px solid #ffffff;
+    margin-top: -5px;
 }
 
 .v-list-item--active {

@@ -1,7 +1,6 @@
 <template>
   <section class="section bg-primary">
     <v-container class="reviews-wrap align-center justify-center">
-      <!-- Titel + Aktionen -->
       <div class="d-flex align-center justify-space-between mb-6 flex-wrap ga-3">
         <h1 class="services-title mb-0">Kundenstimmen</h1>
 
@@ -13,15 +12,6 @@
               @click="$router.push('/reviews/new')"
           >
             Bewertung schreiben
-          </v-btn>
-          <v-btn
-              color="white"
-              variant="text"
-              append-icon="mdi-refresh"
-              :loading="store.loading"
-              @click="reload"
-          >
-            Aktualisieren
           </v-btn>
         </div>
       </div>
