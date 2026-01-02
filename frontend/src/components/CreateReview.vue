@@ -70,12 +70,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { reactive, ref} from 'vue'
+import { useRouter } from 'vue-router'
 import { useReviewsStore} from "../stores/reviews.ts";
 
 const store = useReviewsStore()
-const route = useRoute()
 const router = useRouter()
 
 const valid = ref(false)
@@ -90,18 +89,18 @@ const form = reactive({
 
 const rules = { required: (v: any) => !!v || 'Pflichtfeld' }
 
-const fieldError = ref<string | null>(null)
+const fieldError = ref<string>('')
 
 const snack = reactive({ ok: false, err: false })
-const errorMsg = ref('')
+const errorMsg = ref<string>('')
 
 async function submit() {
   try {
     loading.value = true
-    fieldError.value = null
+    fieldError.value = ''
     await store.create({
       code: form.code.trim().toUpperCase(),
-      name : form.name?.trim() || undefined,
+      name : form.name.trim(),
       rating: form.rating,
       text: form.text.trim(),
     })

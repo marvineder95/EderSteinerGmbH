@@ -1,0 +1,44 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: es_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: edersteiner
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  api:
+    build: ./backend
+    container_name: es_api
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:mysql://db:3306/edersteiner?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Vienna
+    expose:
+      - "8080"
+
+  web:
+    build: ./frontend
+    container_name: es_web
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  mysql_data:
+  caddy_data:
+  caddy_config:

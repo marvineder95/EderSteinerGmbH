@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { api} from "../service/api.ts";
-import type { Review } from '@/types/reviews'
+import type {CreateReviewRequest, ReviewDto} from "../types/reviews.ts";
 
 type PagePayload<T> =
     | T[]
@@ -27,7 +27,7 @@ function normalizePage<T>(data: PagePayload<T>) {
 
 export const useReviewsStore = defineStore('reviews', {
     state: () => ({
-        list: [] as Review[],
+        list: [] as ReviewDto[],
         page: 0,
         size: 10,
         totalPages: 1,
@@ -52,8 +52,8 @@ export const useReviewsStore = defineStore('reviews', {
             this.loading = true
             this.error = null
             try {
-                const data = await api.get('/reviews', { params: { page, size: this.size } })
-                const { items, page: srvPage, totalPages } = normalizePage<Review>(data)
+                const res = await api.get(`/reviews`, { params: { page, size: this.size } })
+                const { items, page: srvPage, totalPages } = normalizePage<ReviewDto>(res.data)
 
                 this.list = page === 0 ? items : [...this.list, ...items]
                 this.page = srvPage
@@ -66,11 +66,11 @@ export const useReviewsStore = defineStore('reviews', {
             }
         },
 
-        async create(payload: Omit<Review, 'id' | 'createdAt'>) {
+        async create(payload: Omit<CreateReviewRequest, 'id' | 'createdAt'>) {
             this.loading = true
             this.error = null
             try {
-                const created = await api.post('/reviews', payload) as Review
+                const created = await api.post('/reviews', payload) as ReviewDto
                 if (created?.id) this.list = [created, ...this.list]
                 else await this.fetchPage(0)
             } catch (e: any) {

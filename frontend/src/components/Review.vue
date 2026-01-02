@@ -75,7 +75,7 @@
 
             <v-spacer />
 
-            <!-- Optionaler Footer, z.B. Herkunft -->
+            <!-- Optionaler Footer, z.B. Herkunft
             <v-card-actions class="pt-0">
               <v-chip
                   v-if="r.source"
@@ -86,7 +86,7 @@
               >
                 {{ r.source }}
               </v-chip>
-            </v-card-actions>
+            </v-card-actions> -->
           </v-card>
         </v-col>
       </v-row>

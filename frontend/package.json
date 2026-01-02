@@ -17,11 +17,12 @@
     "vuetify": "^3.9.3"
   },
   "devDependencies": {
+    "@types/node": "^20.19.27",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/tsconfig": "^0.7.0",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
-    "typescript": "~5.8.3",
+    "typescript": "^5.9.3",
     "vite": "^7.0.4",
     "vite-plugin-vuetify": "^2.1.2",
     "vue-tsc": "^2.2.12"

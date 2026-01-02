@@ -12,12 +12,7 @@
 </template>
 
 <script setup lang="ts">
-function scrollToContact() {
-  const contactSection = document.getElementById('contact')
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' })
-  }
-}
+
 </script>
 
 <style scoped>
