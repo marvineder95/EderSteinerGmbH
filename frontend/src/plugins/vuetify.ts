@@ -1,4 +1,3 @@
-import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -11,7 +10,6 @@ const esTheme = {
         secondary: '#1f2937',
         surface: '#ffffff',
         background: '#f5f5f7',
-
         error: '#FF5252',
         info: '#2196F3',
         success: '#4CAF50',
@@ -19,7 +17,7 @@ const esTheme = {
     },
 }
 
-export default createVuetify({
+export const vuetify = createVuetify({
     components,
     directives,
     icons: {
@@ -29,8 +27,6 @@ export default createVuetify({
     },
     theme: {
         defaultTheme: 'esTheme',
-        themes: {
-            esTheme,
-        },
+        themes: { esTheme },
     },
 })
